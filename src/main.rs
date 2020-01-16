@@ -5,14 +5,20 @@ extern crate stopwatch;
 #[macro_use] extern crate rocket;
 
 use stopwatch::{Stopwatch};
+use std::collections::HashMap;
+use rocket_contrib::templates::Template;
 
 fn main() {
-    rocket::ignite().attach(Template::fairing()).mount("/", routes![index, average_request_time]).launch();
+    rocket::ignite()
+        .mount("/", routes![index, average_request_time])
+        .attach(Template::fairing())
+        .launch();
 }
 
 #[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
+fn index() -> Template {
+    let context = HashMap::<String, String>::new();
+    return Template::render("index", context);
 }
 
 fn chrono(domain: &str) -> i64 {
@@ -21,13 +27,13 @@ fn chrono(domain: &str) -> i64 {
     return sw.elapsed_ms();
 }
 
-#[get("/average/<domain>/<number>")]
-fn average_request_time(domain: String, number: i64) -> String {
-    let mut accumullator = 0;
-    for _ in 0..number {
-        accumullator += chrono(&*domain)
+#[get("/average?<domain>&<iterations>")]
+fn average_request_time(domain: String, iterations: i64) -> String {
+    let mut accumulator = 0;
+    for _ in 0..iterations {
+        accumulator += chrono(&*domain);
     }
-    return format!("{}ms", accumullator/number)
+    return format!("{}ms", accumulator/iterations);
 }
 
 // https://leonardoce.github.io/2018-03-15/rocket-tutorial-3

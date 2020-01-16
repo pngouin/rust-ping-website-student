@@ -28,12 +28,14 @@ fn chrono(domain: &str) -> i64 {
 }
 
 #[get("/average?<domain>&<iterations>")]
-fn average_request_time(domain: String, iterations: i64) -> String {
+fn average_request_time(domain: String, iterations: i64) -> Template {
     let mut accumulator = 0;
     for _ in 0..iterations {
         accumulator += chrono(&*domain);
     }
-    return format!("{}ms", accumulator/iterations);
+    let mut context = HashMap::<String, String>::new();
+    context.insert(("result").to_string(), (accumulator/iterations).to_string());
+    return Template::render("average", context);
 }
 
 // https://leonardoce.github.io/2018-03-15/rocket-tutorial-3

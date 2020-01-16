@@ -23,8 +23,8 @@ fn main() {
 #[get("/")]
 fn index() -> Template {
     let context = HashMap::<String, String>::new();
-    return Template::render("index", context);
 
+    return Template::render("domain_ping_response_average/form", context);
 }
 
 fn chrono(domain: &str) -> i64 {
@@ -42,8 +42,9 @@ fn average_request_time(domain: String, iterations: i64) -> Template {
     }
 
     let mut context = HashMap::<String, String>::new();
-    context.insert(("result").to_string(), (accumulator/iterations).to_string());
-    return Template::render("average", context);
-}
+    context.insert("domain".to_string(), (domain).to_string());
+    context.insert("iterations".to_string(), (iterations).to_string());
+    context.insert("result".to_string(), (accumulator / iterations).to_string());
 
-// https://leonardoce.github.io/2018-03-15/rocket-tutorial-3
+    return Template::render("domain_ping_response_average/result", context);
+}

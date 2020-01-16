@@ -1,0 +1,8 @@
+{% extends "base" %}
+
+{% block content %}
+<div class="container">
+    Pinging <a href="{{domain}}">{{domain}}</a><br>
+    Result: {{result}} ms ({{iterations}} iterations)
+</div>
+{% endblock content %} 

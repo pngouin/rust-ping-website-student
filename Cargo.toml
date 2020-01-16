@@ -1,0 +1,19 @@
+[package]
+name = "archi-distri"
+version = "0.1.0"
+authors = ["Pingouin <me@pingouin.io>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+log = "0.4"
+http = "0.2.0"
+reqwest = { version = "0.10.1", features = ["blocking", "json"] }
+stopwatch = "0.0.7"
+rocket = "0.4.2"
+
+[dependencies.rocket_contrib]
+version = "0.4.2"
+default-features = false
+features = ["handlebars_templates", "tera_templates"]

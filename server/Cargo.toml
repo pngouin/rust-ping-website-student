@@ -16,4 +16,3 @@ rocket = "0.4.2"
 [dependencies.rocket_contrib]
 version = "0.4.2"
 default-features = false
-features = ["handlebars_templates", "tera_templates"]

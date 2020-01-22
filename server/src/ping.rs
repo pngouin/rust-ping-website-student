@@ -18,10 +18,10 @@ pub struct PingResponse {
     ping: i64,
 }
 
-#[post("/ping", data = "<task>")]
-pub fn ping_endpoint(task: Form<PingRequest>) -> Json<PingResponse> {
-    let result = ping_domain(task.domain.as_str(), task.iterations);
-    let response = Json(PingResponse { ping: result });
+#[post("/ping", format="application/x-www-form-urlencoded", data = "<user_input>")]
+pub fn ping_endpoint(user_input: Form<PingRequest>) -> i64{
+    let result = ping_domain(user_input.domain.as_str(), user_input.iterations);
+    let response = PingResponse { ping: result };
     return response;
 }
 

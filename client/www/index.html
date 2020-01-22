@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hello wasm-pack!</title>
-  </head>
-  <body>
-    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
-    <script src="./bootstrap.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Ping Sender</title>
+</head>
+
+<body>
+  <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+  <script src="./bootstrap.js"></script>
+
+  <form id="ping-request-form">
+    <label for="domain">Domain</label>
+    <input type="url" name="domain" id="domain">
+
+    <label for="iterations">Iterations</label>
+    <input type="number" name="iterations" id="iterations" min="5">
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="result-container">
+  </div>
+
+</body>
 </html>

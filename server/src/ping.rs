@@ -19,9 +19,9 @@ pub struct PingResponse {
 }
 
 #[post("/ping", format="application/x-www-form-urlencoded", data = "<user_input>")]
-pub fn ping_endpoint(user_input: Form<PingRequest>) -> i64{
+pub fn ping_endpoint(user_input: Form<PingRequest>) -> Json<PingResponse>{
     let result = ping_domain(user_input.domain.as_str(), user_input.iterations);
-    let response = PingResponse { ping: result };
+    let response = Json(PingResponse { ping: result });
     return response;
 }
 

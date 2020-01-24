@@ -11,7 +11,7 @@ extern crate rocket_cors;
 #[macro_use]
 extern crate serde_derive;
 
-mod ping;
+mod business;
 
 use rocket::http::Method;
 use rocket_cors::{ AllowedHeaders, AllowedOrigins, Error, Cors, CorsOptions };
@@ -41,7 +41,7 @@ fn cors() -> Cors {
 
 fn rocket() -> rocket::Rocket {
     return rocket::ignite()
-        .mount("/", routes![crate::ping::ping_endpoint])
+        .mount("/", routes![crate::business::ping::ping_endpoint])
         .attach(cors());
 }
 

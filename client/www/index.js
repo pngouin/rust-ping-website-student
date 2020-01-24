@@ -7,7 +7,7 @@ const resultContainer = document.getElementById('result-container');
 
 const displayResult = (domain, iterations, ping) => {
     const paragraph = document.createElement('p');
-    paragraph.textContent = `${domain} :: ${ping} ms avg. on ${iterations} request(s)`;
+    paragraph.textContent = `${domain} -> ${ping} ms avg. on ${iterations} request(s)`;
     resultContainer.appendChild(paragraph);
 }
 
@@ -38,6 +38,7 @@ const pingServer = async (ev) => {
 
     xhr.send(body);
 
+    pingRequestForm.reset();
     return false;
 }
 

@@ -16,7 +16,9 @@ rustup update && cargo update
 
 ### Server Setup
 
-Make sure your CLI directory is `server`
+⚠ Make sure your CLI directory is `server` ⚠
+
+To build the server:
 
 ```sh
 cargo build
@@ -30,16 +32,16 @@ cargo run
 
 ### Client Setup
 
-Make sure your CLI directory is `client`
+⚠ Make sure your CLI directory is `client` ⚠
 
-To build the rust project
+To build the rust project:
 
 ```sh
 cargo build
 wasm-pack build
 ```
 
-Then to run the node application:
+To then run the node application:
 
 ```sh
 cd www
@@ -51,7 +53,7 @@ npm start
 
 ## Server and Client configuration
 
-### Domain and ports
+### Domains and ports
 
 Server is running on `http://localhost:8000/` and client is running on `http://localhost:8080`.
 
@@ -59,7 +61,7 @@ Server is running on `http://localhost:8000/` and client is running on `http://l
 
  * ping_endpoint
 
-Computes the average response to the provided `domain`. Number of sampling is provided via the `iterations` body member.
+Computes the average response time to the provided `domain`. Number of sampling iterations is provided via the `iterations` body member.
 
 ```rust
 #[post("/ping", format="application/x-www-form-urlencoded", data = "<user_input>")]

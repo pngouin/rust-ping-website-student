@@ -3,6 +3,6 @@ table! {
         id -> Integer,
         url -> Text,
         iteration -> Integer,
-        result -> Integer,
+        ping -> Integer,
     }
 }

@@ -10,33 +10,35 @@ use stopwatch::Stopwatch;
 #[derive(FromForm)]
 pub struct PingRequest {
     domain: String,
-    iterations: i64,
+    iterations: i32,
 }
 
 #[derive(Serialize)]
 pub struct PingResponse {
-    ping: i64,
+    ping: i32,
 }
 
 #[post("/ping", format="application/x-www-form-urlencoded", data = "<user_input>")]
 pub fn ping_endpoint(user_input: Form<PingRequest>) -> Json<PingResponse>{
     let result = ping_domain(user_input.domain.as_str(), user_input.iterations);
-    let response = Json(PingResponse { ping: result });
-    return response;
+
+    // TODO: Insert in database
+
+    Json(PingResponse { ping: result })
 }
 
-fn ping_domain(domain: &str, iterations: i64) -> i64 {
+fn ping_domain(domain: &str, iterations: i32) -> i32 {
     let mut accumulator = 0;
     for _ in 0..iterations {
         accumulator += ping_domain_once(domain);
     }
 
-    return accumulator / iterations;
+    accumulator / iterations
 }
 
-fn ping_domain_once(domain: &str) -> i64 {
+fn ping_domain_once(domain: &str) -> i32 {
     let sw = Stopwatch::start_new();
     let _ = reqwest::blocking::get(domain);
 
-    return sw.elapsed_ms();
+    sw.elapsed_ms() as i32
 }

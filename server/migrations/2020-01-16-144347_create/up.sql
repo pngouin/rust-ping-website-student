@@ -2,5 +2,5 @@ CREATE TABLE ping_history (
     id INTEGER NOT NULL PRIMARY KEY,
     url VARCHAR NOT NULL,
     iteration INTEGER NOT NULL,
-    result INTEGER NOT NULL
+    ping INTEGER NOT NULL
 )

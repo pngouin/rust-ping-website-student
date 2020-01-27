@@ -70,6 +70,10 @@ pub fn ping_endpoint(user_input: Form<PingRequest>) -> Json<PingResponse>
 // Body:
 pub struct PingRequest {
     domain: String,
-    iterations: i64,
+    iterations: i32,
 }
 ```
+
+TODO:
+ * http://diesel.rs/guides/getting-started/
+ * https://doc.rust-lang.org/rust-by-example/trait.html

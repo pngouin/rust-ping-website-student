@@ -1,4 +1,4 @@
-mod models;
-mod schema;
+pub mod schema;
 
+pub mod models;
 pub mod lib;

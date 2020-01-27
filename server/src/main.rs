@@ -10,8 +10,12 @@ extern crate rocket;
 extern crate rocket_cors;
 #[macro_use]
 extern crate serde_derive;
+#[macro_use]
+extern crate diesel;
+extern crate dotenv;
 
 mod business;
+mod database;
 
 use rocket::http::Method;
 use rocket_cors::{ AllowedHeaders, AllowedOrigins, Error, Cors, CorsOptions };
@@ -21,7 +25,7 @@ fn cors() -> Cors {
         "http://localhost:8080"
     ]);
 
-    return CorsOptions {
+    CorsOptions {
         allowed_origins,
         allowed_methods:vec![
             Method::Get,
@@ -36,17 +40,19 @@ fn cors() -> Cors {
         ..Default::default()
     }
     .to_cors()
-    .expect("error while building CORS");
+    .expect("error while building CORS")
 }
 
 fn rocket() -> rocket::Rocket {
-    return rocket::ignite()
+    rocket::ignite()
         .mount("/", routes![crate::business::ping_service::ping_endpoint])
-        .attach(cors());
+        .attach(cors())
 }
 
 fn main() -> Result<(), Error> {
+    let _connection = database::lib::establish_connection();
+
     rocket().launch();
 
-    return Ok(());
+    Ok(())
 }

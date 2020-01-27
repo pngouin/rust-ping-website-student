@@ -41,7 +41,7 @@ fn cors() -> Cors {
 
 fn rocket() -> rocket::Rocket {
     return rocket::ignite()
-        .mount("/", routes![crate::business::ping::ping_endpoint])
+        .mount("/", routes![crate::business::ping_service::ping_endpoint])
         .attach(cors());
 }
 

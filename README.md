@@ -21,8 +21,18 @@ rustup update && cargo update
 To build the server:
 
 ```sh
+disel setup
 cargo build
 ```
+
+You might need to set up the `DATABASE_URL` environment variable to run diesel cli:
+```sh
+set DATABASE_URL=PATH
+```
+```powershell
+$Env:DATABASE_URL="PATH"
+```
+
 
 To then run the server:
 
